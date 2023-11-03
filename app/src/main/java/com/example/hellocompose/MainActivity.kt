@@ -34,11 +34,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.hellocompose.data.LoginData
 import com.example.hellocompose.frontend.CreateUserPage
+import com.example.hellocompose.frontend.EditUserPage
 import com.example.hellocompose.frontend.Homepage
 import com.example.hellocompose.respon.LoginRespon
 import com.example.hellocompose.service.LoginService
@@ -65,7 +68,7 @@ class MainActivity : ComponentActivity() {
                 startDestination = "pagetwo"
             }
 
-            NavHost(navController, startDestination = startDestination) {
+            NavHost(navController, startDestination = "pagetwo") {
                 composable(route = "greeting") {
                     Greeting(navController)
                 }
@@ -74,6 +77,11 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route = "createuserpage") {
                     CreateUserPage(navController)
+                }
+                composable(route = "edituserpage/{userid}/{username}",
+                    ) {backStackEntry ->
+                    
+                    EditUserPage(navController, backStackEntry.arguments?.getString("userid"), backStackEntry.arguments?.getString("username"))
                 }
             }
         }
