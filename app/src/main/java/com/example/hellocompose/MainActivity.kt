@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                 startDestination = "pagetwo"
             }
 
-            NavHost(navController, startDestination = "pagetwo") {
+            NavHost(navController, startDestination = startDestination) {
                 composable(route = "greeting") {
                     Greeting(navController)
                 }

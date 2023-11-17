@@ -60,9 +60,6 @@ fun EditUserPage(navController: NavController, userid : String?, usernameParamet
             .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (userid != null) {
-                Text(userid)
-            }
             OutlinedTextField(value = username, onValueChange = { newText ->
                 username = newText
             }, label = { Text("Username") })
@@ -81,7 +78,7 @@ fun EditUserPage(navController: NavController, userid : String?, usernameParamet
                     ) {
                         print(response.code())
                         if (response.code() == 200) {
-
+                            navController.navigate("pagetwo")
                         } else if (response.code() == 400) {
                             print("error login")
                             var toast = Toast.makeText(
