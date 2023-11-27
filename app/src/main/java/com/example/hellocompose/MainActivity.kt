@@ -242,7 +242,7 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
                             navController.navigate("pagetwo")
                         }else if(response.code() == 400){
                             print("error login")
-                            var toast = Toast.makeText(context, "Username atau password salah", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Username atau password salah", Toast.LENGTH_SHORT).show()
 
                         }
                     }
