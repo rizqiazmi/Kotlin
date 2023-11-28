@@ -8,4 +8,4 @@ Names of group members:
 DEWA NANDHIKA        / 1201210001 / SE-04-01;
 MOCHAMMAD RIZQI AZMI / 1201210002 / SE-04-01;
 
-[GitHub Pages]([(https://www.figma.com/file/O0EwtQlucfhvwrUvSI1aRC/GALON?type=design&mode=design&t=HJKzTv0471bBnp3E-1)https://www.figma.com/file/O0EwtQlucfhvwrUvSI1aRC/GALON?type=design&mode=design&t=HJKzTv0471bBnp3E-1]).
+[GitHub Pages](https://www.figma.com/file/O0EwtQlucfhvwrUvSI1aRC/GALON?type=design&mode=design&t=HJKzTv0471bBnp3E-1).
