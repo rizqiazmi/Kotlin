@@ -68,7 +68,7 @@ fun Homepage(navController: NavController, context: Context = LocalContext.curre
         .create(UserService::class.java)
 
     fun loadData(search: String?){
-        val call = retrofit.getData(search)
+        val call = retrofit.getData(search, "*", "username:desc")
         call.enqueue(object : Callback<List<UserRespon>> {
             override fun onResponse(
                 call: Call<List<UserRespon>>,
@@ -79,6 +79,7 @@ fun Homepage(navController: NavController, context: Context = LocalContext.curre
                     listUser.clear()
                     response.body()?.forEach{ userRespon ->
                         listUser.add(userRespon)
+
                     }
                 } else if (response.code() == 400) {
                     print("error login")
