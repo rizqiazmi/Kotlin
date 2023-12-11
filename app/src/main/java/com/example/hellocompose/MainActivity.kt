@@ -87,7 +87,7 @@ class MainActivity : ComponentActivity() {
                 drawerState = drawerState,
                 drawerContent = {
                     ModalDrawerSheet {
-                        Text("Sewa Camera", modifier = Modifier.padding(16.dp))
+                        Text("Galon", modifier = Modifier.padding(16.dp))
                         Divider()
                         NavigationDrawerItem(
                             label = { Text(text = "Add User") },
@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text(text = "Sewa Camera") },
+                            title = { Text(text = "Galon") },
                             navigationIcon = {
                                 IconButton(onClick = {
                                     scope.launch {
@@ -204,7 +204,7 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
         bottomBar = {
             BottomAppBar {
                 Text(
-                    text = "QRis",
+                    text = "Galon",
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxSize()
                 )
