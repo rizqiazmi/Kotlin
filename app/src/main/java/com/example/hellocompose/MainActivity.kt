@@ -99,6 +99,17 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         )
+
+                        NavigationDrawerItem(
+                            label = { Text(text = "Logout") },
+                            selected = false,
+                            onClick = {
+                                navController.navigate("greeting")
+                                scope.launch {
+                                    drawerState.close()
+                                }
+                            }
+                        )
                         // ...other drawer items
                     }
                 }

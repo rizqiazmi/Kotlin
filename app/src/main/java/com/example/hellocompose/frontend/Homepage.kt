@@ -125,13 +125,13 @@ fun Homepage(navController: NavController, context: Context = LocalContext.curre
             }
         },
         topBar = {
-            TopAppBar(
-                title = { Text(text = "Homepage") },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-            )
+//            TopAppBar(
+//                title = { Text(text = "Homepage") },
+//                colors = TopAppBarDefaults.smallTopAppBarColors(
+//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+//                    titleContentColor = MaterialTheme.colorScheme.primary,
+//                ),
+//            )
         },) {
             innerPadding ->
         Column (modifier = Modifier
