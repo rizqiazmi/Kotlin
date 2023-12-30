@@ -1,5 +1,6 @@
 package com.example.hellocompose
 
+import Welcome
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ElevatedButton
@@ -46,14 +46,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.hellocompose.data.LoginData
 import com.example.hellocompose.frontend.CreateUserPage
 import com.example.hellocompose.frontend.EditUserPage
+import com.example.hellocompose.frontend.Greeting
 import com.example.hellocompose.frontend.Homepage
 import com.example.hellocompose.respon.LoginRespon
 import com.example.hellocompose.service.LoginService
@@ -71,15 +70,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //val preferencesManager = remember { PreferencesManager(context = LocalContext.current) }
-            val sharedPreferences: SharedPreferences = LocalContext.current.getSharedPreferences("auth", Context.MODE_PRIVATE)
+            val sharedPreferences: SharedPreferences =
+                LocalContext.current.getSharedPreferences("auth", Context.MODE_PRIVATE)
             val navController = rememberNavController()
 
             var startDestination: String
             var jwt = sharedPreferences.getString("jwt", "")
-            if(jwt.equals("")){
-                startDestination = "pagetwo"
-            }else{
-                startDestination = "pagetwo"
+            if (jwt.equals("")) {
+                startDestination = "Splash"
+            } else {
+                startDestination = "Splash"
             }
             val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
             val scope = rememberCoroutineScope()
@@ -114,55 +114,34 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             ) {
-                Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = { Text(text = "Galon") },
-                            navigationIcon = {
-                                IconButton(onClick = {
-                                    scope.launch {
-                                        drawerState.apply {
-                                            if (isClosed) open() else close()
-                                        }
-                                    }
-                                }) {
-                                    Icon(imageVector = Icons.Outlined.Menu, contentDescription = "")
-                                }
-                            }
-                        )
-
-                        },
-                    floatingActionButton = {
-                        ExtendedFloatingActionButton(
-                            text = { Text("Show drawer") },
-                            icon = { Icon(Icons.Filled.Add, contentDescription = "") },
-                            onClick = {
-                                scope.launch {
-                                    drawerState.apply {
-                                        if (isClosed) open() else close()
-                                    }
-                                }
-                            }
-                        )
-                    }
-                ) { contentPadding ->
                     // Screen content
-                    NavHost(navController, startDestination = startDestination, modifier = Modifier.padding(contentPadding)) {
-                composable(route = "greeting") {
-                    Greeting(navController)
-                }
-                composable(route = "pagetwo") {
-                    Homepage(navController)
-                }
-                composable(route = "createuserpage") {
-                    CreateUserPage(navController)
-                }
-                composable(route = "edituserpage/{userid}/{username}",
-                    ) {backStackEntry ->
+                    NavHost(
+                        navController,
+                        startDestination = startDestination,
+                    ) {
+                        composable(route = "Splash") {
+                            Welcome(navController)
+                        }
+                        composable(route = "greeting") {
+                            Greeting(navController)
+                        }
+                        composable(route = "pagetwo") {
+                            Homepage(navController)
+                        }
+                        composable(route = "createuserpage") {
+                            CreateUserPage(navController)
+                        }
+                        composable(
+                            route = "edituserpage/{userid}/{username}",
+                        ) { backStackEntry ->
 
-                    EditUserPage(navController, backStackEntry.arguments?.getString("userid"), backStackEntry.arguments?.getString("username"))
-                }
-            }
+                            EditUserPage(
+                                navController,
+                                backStackEntry.arguments?.getString("userid"),
+                                backStackEntry.arguments?.getString("username")
+                            )
+                        }
+                    }
                 }
             }
 
@@ -184,90 +163,4 @@ class MainActivity : ComponentActivity() {
 //            }
         }
     }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Greeting(navController: NavController, context: Context = LocalContext.current) {
-
-    val preferencesManager = remember { PreferencesManager(context = context) }
-    var username by remember { mutableStateOf(TextFieldValue("")) }
-    var password by remember { mutableStateOf(TextFieldValue("")) }
-    var baseUrl = "http://10.0.2.2:1337/api/"
-    var jwt by remember { mutableStateOf("") }
-
-    jwt = preferencesManager.getData("jwt")
-    Scaffold (
-        topBar = {
-            TopAppBar(
-                title = { Text(text = "Login") },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
-            }
-        },
-        bottomBar = {
-            BottomAppBar {
-                Text(
-                    text = "Galon",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
-    ){
-            innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            OutlinedTextField(value = username, onValueChange = { newText ->
-                username = newText
-            }, label = { Text("Username") })
-            OutlinedTextField(value = password, onValueChange = { newText ->
-                password = newText
-            }, label = { Text("Password") })
-            ElevatedButton(onClick = {
-                //navController.navigate("pagetwo")
-                val retrofit = Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(LoginService::class.java)
-                val call = retrofit.getData(LoginData(username.text, password.text))
-                call.enqueue(object : Callback<LoginRespon>{
-                    override fun onResponse(call: Call<LoginRespon>, response: Response<LoginRespon>) {
-                        print(response.code())
-                        if(response.code() == 200){
-                            jwt = response.body()?.jwt!!
-                            preferencesManager.saveData("jwt", jwt)
-                            navController.navigate("pagetwo")
-                        }else if(response.code() == 400){
-                            print("error login")
-                            Toast.makeText(context, "Username atau password salah", Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-
-                    override fun onFailure(call: Call<LoginRespon>, t: Throwable) {
-                        print(t.message)
-                    }
-
-                })
-            }) {
-                Text(text = "Submit")
-            }
-            Text(text = jwt)
-        }
-    }
-
-}
