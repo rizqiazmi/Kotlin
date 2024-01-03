@@ -61,7 +61,16 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
     var jwt by remember { mutableStateOf("") }
     val imageModifier = Modifier
         .size(140.dp)
-        .offset(x = 135.dp, y = 15.dp)
+        .offset(x = 135.dp, y = 25.dp)
+    val imageModifier2 = Modifier
+        .size(45.dp)
+        .offset(x = 180.dp, y = 530.dp)
+    val imageModifier3 = Modifier
+        .size(45.dp)
+        .offset(x = 115.dp, y = 530.dp)
+    val imageModifier4 = Modifier
+        .size(45.dp)
+        .offset(x = 250.dp, y = 530.dp)
 
     jwt = preferencesManager.getData("jwt")
     Scaffold(
@@ -79,15 +88,15 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
 //                Icon(Icons.Default.Add, contentDescription = "Add")
 //            }
 //        },
-        bottomBar = {
-            BottomAppBar {
-                Text(
-                    text = "Galon",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
+//        bottomBar = {
+//            BottomAppBar {
+//                Text(
+//                    text = "Galon",
+//                    textAlign = TextAlign.Center,
+//                    modifier = Modifier.fillMaxSize()
+//                )
+//            }
+//        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -144,7 +153,7 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
                     contentColor = Color.White // Set text color
                 )
                 ) {
-                Text(text = "Submit")
+                Text(text = "Sign In")
 
             }
         }
@@ -154,6 +163,24 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
         contentDescription = "image description",
         contentScale = ContentScale.Crop,
         modifier = imageModifier
+    )
+    Image(
+        painter = painterResource(id = R.drawable.instagram),
+        contentDescription = "image description",
+        contentScale = ContentScale.Crop,
+        modifier = imageModifier2
+    )
+    Image(
+        painter = painterResource(id = R.drawable.facebook),
+        contentDescription = "image description",
+        contentScale = ContentScale.Crop,
+        modifier = imageModifier3
+    )
+    Image(
+        painter = painterResource(id = R.drawable.twitter),
+        contentDescription = "image description",
+        contentScale = ContentScale.Crop,
+        modifier = imageModifier4
     )
 }
 
