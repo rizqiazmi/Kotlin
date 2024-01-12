@@ -74,29 +74,6 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
 
     jwt = preferencesManager.getData("jwt")
     Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = { Text(text = "Login") },
-//                colors = TopAppBarDefaults.smallTopAppBarColors(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-//                    titleContentColor = MaterialTheme.colorScheme.primary,
-//                ),
-//            )
-//        },
-//        floatingActionButton = {
-//            FloatingActionButton(onClick = { /*TODO*/ }) {
-//                Icon(Icons.Default.Add, contentDescription = "Add")
-//            }
-//        },
-//        bottomBar = {
-//            BottomAppBar {
-//                Text(
-//                    text = "Galon",
-//                    textAlign = TextAlign.Center,
-//                    modifier = Modifier.fillMaxSize()
-//                )
-//            }
-//        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -130,7 +107,7 @@ fun Greeting(navController: NavController, context: Context = LocalContext.curre
                         if (response.code() == 200) {
                             jwt = response.body()?.jwt!!
                             preferencesManager.saveData("jwt", jwt)
-                            navController.navigate("pagetwo")
+                            navController.navigate("Home")
                         } else if (response.code() == 400) {
                             print("error login")
                             Toast.makeText(

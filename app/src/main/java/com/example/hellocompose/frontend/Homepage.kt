@@ -88,6 +88,18 @@ fun Homepage(navController: NavController, context: Context = LocalContext.curre
             ModalDrawerSheet {
                 Text("Galon", modifier = Modifier.padding(16.dp))
                 Divider()
+
+                NavigationDrawerItem(
+                    label = { Text(text = "Dashboard") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate("Home")
+                        scope.launch {
+                            drawerState.close()
+                        }
+                    }
+                )
+
                 NavigationDrawerItem(
                     label = { Text(text = "Add User") },
                     selected = false,
@@ -269,7 +281,6 @@ fun Homepage(navController: NavController, context: Context = LocalContext.curre
                     }
                 }
             }
-
         }
     }
 }
