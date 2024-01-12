@@ -3,6 +3,8 @@ package com.example.hellocompose.frontend
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,6 +18,12 @@ import com.example.hellocompose.R
 
 @Composable
 fun Dashboard(navController: NavController) {
+    val imageList = listOf(
+        R.drawable.satu,
+        R.drawable.dua,
+        R.drawable.tiga,
+        R.drawable.empat
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -50,6 +58,21 @@ fun Dashboard(navController: NavController) {
                 .size(320.dp, 250.dp) // Set the desired size here
                 .clip(shape = RoundedCornerShape(8.dp))
         )
+
+    }
+//    Spacer(modifier = Modifier.padding(vertical = 50.dp))
+    LazyRow(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(top = 200.dp)) {
+        items(imageList) { image ->
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = "image description",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(330.dp)
+                    .padding(all = 12.dp),
+            )
+        }
     }
 
     Box(
