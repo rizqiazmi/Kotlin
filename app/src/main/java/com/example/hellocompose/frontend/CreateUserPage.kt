@@ -44,7 +44,7 @@ fun CreateUserPage(navController: NavController, context: Context = LocalContext
     Scaffold (
         topBar = {
             TopAppBar(
-                title = { Text(text = "Homepage") },
+                title = { Text(text = "Galon") },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
